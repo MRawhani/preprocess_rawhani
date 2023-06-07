@@ -188,18 +188,18 @@ def _make_base(x):
         x_list.append(lemma)
     return ' '.join(x_list)
 
-def _remove_common_words(x,n=20):
-    text = x.split()
+def _get_value_counts(df,col):
+    text = ' '.join(df[col])
+    text = text.split()
     freq_comm = pd.Series(text).value_counts()
-    fn = freq_comm[:n]
+    return freq_comm
+def _remove_common_words(x,freq,n=20):
+    fn = freq[:n]
+    return ' '.join([t for t in x.split() if t not in fn])
+def _remove_rare_words(x,freq,n=20):
+    fn = freq.tail(n)
     return ' '.join([t for t in x.split() if t not in fn])
 
-
-def _remove_rare_words(x,n=20):
-    text = x.split()
-    freq_comm = pd.Series(text).value_counts()
-    fn = freq_comm.tail(n)
-    return ' '.join([t for t in x.split() if t not in fn])
 
 def _spelling_correction(x):
     x = TextBlob(x).correct()
