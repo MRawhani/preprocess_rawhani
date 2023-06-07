@@ -6,6 +6,11 @@ install
 
 `pip install git+ssh://git@github.com:MRawhani/preprocessing_nlp.git`
 
+or 
+
+`pip install git+https://github.com/MRawhani/preprocessing_nlp.git`
+
+
 uninstall
 
 `pip uninstall preprocessing_nlp`
